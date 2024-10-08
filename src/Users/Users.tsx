@@ -1,48 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/Users.tsx
 
-interface User {
-  id: number;
-  username: string;
-  email: string;
-}
+import { useEffect, useState } from 'react'
+import { getUsers, User } from './getUsers' // Import the getUsers function and User interface
 
-const apiBaseUrl = 'http://localhost:8080'; // Replace with your actual API URL
-const postUserUrl = `${apiBaseUrl}/users`;
-
-export default function Users() {
-  const [users, setUsers] = useState<User[]>();
+export default function Users () {
+  const [users, setUsers] = useState<User[]>()
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        // Replace 'user' and 'password' with your actual username and password
-        const response = await axios.get(postUserUrl, {
-          auth: {
-            username: 'user',      // Replace with your username
-            password: 'password',  // Replace with your password
-          },
-        });
-
-        setUsers(response.data);
+        const data = await getUsers() // Use the getUsers function from userService
+        setUsers(data)
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching users:', error)
       }
-    };
+    }
 
-    fetchUsers();
-  }, []);
+    fetchUsers()
+  }, [])
 
   return (
     <div>
       <h1>Users</h1>
       <ul>
-        {users?.map((user) => (
+        {users?.map(user => (
           <li key={user.id}>
             <strong>{user.username}</strong> - {user.email}
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }

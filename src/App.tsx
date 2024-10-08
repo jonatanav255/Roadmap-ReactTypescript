@@ -1,15 +1,19 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import AddUser from './Users/AddUser'
 import Users from './Users/Users'
 
 function App () {
-  // const [count, setCount] = useState(0)
+  const [view, setView] = useState<'users' | 'addUser'>('users')
 
   return (
     <>
-      <Users />
-      <AddUser/>
+      <nav style={{ marginBottom: '20px' }}>
+        <button onClick={() => setView('users')}>Users</button>
+        <button onClick={() => setView('addUser')}>Add User</button>
+      </nav>
+      {view === 'users' && <Users />}
+      {view === 'addUser' && <AddUser />}
     </>
   )
 }

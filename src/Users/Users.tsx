@@ -6,6 +6,7 @@ import { User } from './UserInterface'
 
 export default function Users () {
   const [users, setUsers] = useState<User[]>()
+  console.log(users)
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -18,7 +19,7 @@ export default function Users () {
     }
 
     fetchUsers()
-  }, [users])
+  }, [])
 
   
   return (
@@ -27,7 +28,7 @@ export default function Users () {
       <ul>
         {users?.map(user => (
           <li key={user.id}>
-            <strong>{user.username}</strong> - {user.email}
+            <strong>{user.username}</strong>  {user.email}
           </li>
         ))}
       </ul>

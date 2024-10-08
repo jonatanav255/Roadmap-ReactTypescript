@@ -1,7 +1,8 @@
 // src/Users.tsx
 
 import { useEffect, useState } from 'react'
-import { getUsers, User } from './getUsers' // Import the getUsers function and User interface
+import { getUsers } from './UserService' // Import the getUsers function and User interface
+import { User } from './UserInterface'
 
 export default function Users () {
   const [users, setUsers] = useState<User[]>()
@@ -17,8 +18,9 @@ export default function Users () {
     }
 
     fetchUsers()
-  }, [])
+  }, [users])
 
+  
   return (
     <div>
       <h1>Users</h1>
